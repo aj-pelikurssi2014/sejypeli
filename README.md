@@ -1,0 +1,4 @@
+sejypeli
+========
+
+Seinäjoen kansalaisopiston pelikurssi
