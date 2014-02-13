@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testi", "Testi\Testi\Testi.csproj", "{6DE1E37B-6C7C-41FA-913F-86951A938EA3}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "TestiContent", "Testi\TestiContent\TestiContent.contentproj", "{98E3F0E2-A885-40E2-BB22-08C703CEC0C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DE1E37B-6C7C-41FA-913F-86951A938EA3}.Debug|x86.ActiveCfg = Debug|x86
+		{6DE1E37B-6C7C-41FA-913F-86951A938EA3}.Debug|x86.Build.0 = Debug|x86
+		{6DE1E37B-6C7C-41FA-913F-86951A938EA3}.Release|x86.ActiveCfg = Release|x86
+		{6DE1E37B-6C7C-41FA-913F-86951A938EA3}.Release|x86.Build.0 = Release|x86
+		{98E3F0E2-A885-40E2-BB22-08C703CEC0C4}.Debug|x86.ActiveCfg = Debug|x86
+		{98E3F0E2-A885-40E2-BB22-08C703CEC0C4}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
