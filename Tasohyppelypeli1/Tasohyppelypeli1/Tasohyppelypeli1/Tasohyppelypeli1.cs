@@ -14,9 +14,13 @@ public class Tasohyppelypeli1 : PhysicsGame
 
     PlatformCharacter pelaaja1;
 
+    Image tasoKuva = LoadImage("taso");
+    Image taso2Kuva = LoadImage("taso2");
+    Image kallioKuva = LoadImage("kallio");
     Image pelaajanKuva = LoadImage("norsu");
     Image tahtiKuva = LoadImage("tahti");
     Image tntKuva = LoadImage("tnt");
+    Image rajahtanytKuva = LoadImage("rajahtanytSeina");
 
     SoundEffect maaliAani = LoadSoundEffect("maali");
 
@@ -34,13 +38,14 @@ public class Tasohyppelypeli1 : PhysicsGame
 
     void LuoKentta()
     {
-        TileMap kentta = TileMap.FromLevelAsset("kentta1");
-        kentta.SetTileMethod('#', LisaaTaso);
-        kentta.SetTileMethod('?', LisaaKallio);
-        kentta.SetTileMethod('*', LisaaTahti);
-        kentta.SetTileMethod('+', LisaaRajahde);
-        kentta.SetTileMethod('N', LisaaPelaaja);
-        kentta.Execute(RUUDUN_KOKO, RUUDUN_KOKO);
+        ColorTileMap ruudut = ColorTileMap.FromLevelAsset("kentta");
+        ruudut.SetTileMethod(Color.FromHexCode("56FF56"), LisaaTaso);
+        ruudut.SetTileMethod(Color.FromHexCode("7F3F23"), LisaaTaso2);
+        ruudut.SetTileMethod(Color.FromHexCode("999999"), LisaaKallio);
+        ruudut.SetTileMethod(Color.FromHexCode("FFFF00"), LisaaTahti);
+        ruudut.SetTileMethod(Color.FromHexCode("FF0000"), LisaaRajahde);
+        ruudut.SetTileMethod(Color.FromHexCode("00FFE5"), LisaaPelaaja);
+        ruudut.Execute(RUUDUN_KOKO, RUUDUN_KOKO);
         Level.CreateBorders();
         Level.Background.CreateGradient(Color.White, Color.SkyBlue);
     }
@@ -49,9 +54,20 @@ public class Tasohyppelypeli1 : PhysicsGame
     {
         PhysicsObject taso = PhysicsObject.CreateStaticObject(leveys, korkeus);
         taso.Position = paikka;
-        taso.Color = Color.Green;
         taso.Tag = "seina";
+        taso.Image = tasoKuva;
+        taso.CollisionIgnoreGroup = 1;
         Add(taso);
+    }
+
+    void LisaaTaso2(Vector paikka, double leveys, double korkeus)
+    {
+        PhysicsObject taso2 = PhysicsObject.CreateStaticObject(leveys, korkeus);
+        taso2.Position = paikka;
+        taso2.Tag = "seina";
+        taso2.Image = taso2Kuva;
+        taso2.CollisionIgnoreGroup = 1;
+        Add(taso2);
     }
 
     void LisaaTahti(Vector paikka, double leveys, double korkeus)
@@ -68,8 +84,9 @@ public class Tasohyppelypeli1 : PhysicsGame
     {
         PhysicsObject kallio = PhysicsObject.CreateStaticObject(leveys, korkeus);
         kallio.Position = paikka;
-        kallio.Color = Color.Gray;
+        kallio.Image = kallioKuva;
         kallio.Tag = "kallio";
+        kallio.CollisionIgnoreGroup = 1;
         Add(kallio);
     }
 
@@ -144,6 +161,13 @@ public class Tasohyppelypeli1 : PhysicsGame
     {
         if (kohde.Tag.ToString() == "seina")
         {
+            PhysicsObject rajahtanytSeina = PhysicsObject.CreateStaticObject(RUUDUN_KOKO, RUUDUN_KOKO);
+            rajahtanytSeina.Position = kohde.Position;
+            rajahtanytSeina.Image = rajahtanytKuva;
+            rajahtanytSeina.CollisionIgnoreGroup = 1;
+            rajahtanytSeina.IgnoresCollisionResponse = true; 
+            Add(rajahtanytSeina, -1);
+
             kohde.Destroy();
         }
     }
