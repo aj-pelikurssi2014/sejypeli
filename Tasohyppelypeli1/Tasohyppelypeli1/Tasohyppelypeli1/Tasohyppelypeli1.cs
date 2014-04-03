@@ -11,13 +11,14 @@ public class Tasohyppelypeli1 : PhysicsGame
     const double nopeus = 200;
     const double hyppyNopeus = 750;
     const int RUUDUN_KOKO = 40;
-
+    bool pelaajaAlhaalla = false;
     PlatformCharacter pelaaja1;
 
     Image tasoKuva = LoadImage("taso");
     Image taso2Kuva = LoadImage("taso2");
     Image kallioKuva = LoadImage("kallio");
     Image pelaajanKuva = LoadImage("norsu");
+    Image pelaajanKuvaKyykyssa = LoadImage("litistynytnorsu");
     Image tahtiKuva = LoadImage("tahti");
     Image tntKuva = LoadImage("tnt");
     Image rajahtanytKuva = LoadImage("rajahtanytSeina");
@@ -179,6 +180,8 @@ public class Tasohyppelypeli1 : PhysicsGame
 
         Keyboard.Listen(Key.Left, ButtonState.Down, Liikuta, "Liikkuu vasemmalle", pelaaja1, -nopeus);
         Keyboard.Listen(Key.Right, ButtonState.Down, Liikuta, "Liikkuu vasemmalle", pelaaja1, nopeus);
+        Keyboard.Listen(Key.Down, ButtonState.Down, MeneAlas, "Menee kyykkyyn", pelaaja1);
+        Keyboard.Listen(Key.Down, ButtonState.Released, NouseYlos, "Nousee ylös", pelaaja1);
         Keyboard.Listen(Key.A, ButtonState.Pressed, Hyppaa, "Pelaaja hyppää", pelaaja1, hyppyNopeus);
         Keyboard.Listen(Key.S, ButtonState.Down, ammu, "Pelaaja ampuu", pelaaja1);
 
@@ -193,12 +196,38 @@ public class Tasohyppelypeli1 : PhysicsGame
 
     void Liikuta(PlatformCharacter hahmo, double nopeus)
     {
-        hahmo.Walk(nopeus);
+        if (pelaajaAlhaalla == true)
+        {
+            hahmo.Walk(nopeus / 2);
+        }
+        else
+        {
+            hahmo.Walk(nopeus);
+        }
+    }
+
+    void MeneAlas(PlatformCharacter hahmo)
+    {
+        pelaajaAlhaalla = true;
+        hahmo.Image = pelaajanKuvaKyykyssa;
+    }
+
+    void NouseYlos(PlatformCharacter hahmo)
+    {
+        pelaajaAlhaalla = false;
+        hahmo.Image = pelaajanKuva;
     }
 
     void Hyppaa(PlatformCharacter hahmo, double nopeus)
     {
-        hahmo.Jump(nopeus);
+        if (pelaajaAlhaalla == true)
+        {
+            //Älä tee mitään
+        }
+        else
+        {
+            hahmo.Jump(nopeus);
+        }
     }
 
     void ammu(PlatformCharacter pelaaja1)
